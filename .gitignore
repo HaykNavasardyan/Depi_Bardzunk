@@ -1,0 +1,23 @@
+# Python / Poetry
+__pycache__/
+*.pyc
+server/.venv/
+server/.pytest_cache/
+server/.mypy_cache/
+server/.ruff_cache/
+server/.coverage
+server/.env
+
+# Node/Flutter if you add mobile later
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-*
+node_modules/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Docker
+pgdata/

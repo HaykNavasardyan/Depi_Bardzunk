@@ -53,11 +53,18 @@ A FastAPI backend application with PostgreSQL database support.
 
 - `GET /` - Welcome message
 - `GET /health` - Health check (returns `{"ok": true}`)
+- `POST /users` - Create a new user (requires `{"name": "string"}`)
+- `GET /users` - List all users (supports pagination with `?skip=0&limit=100`)
+
+### Database Models
+
+- **User**: `id` (PK), `name`, `created_at`
 
 ### Testing
 
 The application includes comprehensive tests:
 - Health endpoint tests
+- User CRUD operations tests
 - API response validation
 
 Run tests with: `make test`
@@ -68,9 +75,13 @@ Run tests with: `make test`
 server/
 ├── app/
 │   ├── __init__.py
-│   └── main.py          # FastAPI application
+│   ├── main.py          # FastAPI application
+│   ├── models.py        # SQLAlchemy models
+│   ├── deps.py          # Dependencies
+│   └── routes_users.py  # User endpoints
 ├── alembic/             # Database migrations
 ├── tests/               # Test suite
+├── database.py          # Database configuration
 ├── pyproject.toml       # Poetry configuration
 ├── alembic.ini         # Alembic configuration
 ├── Makefile            # Development commands
@@ -80,3 +91,10 @@ server/
 ## Database
 
 The application uses PostgreSQL with SQLAlchemy ORM and Alembic for migrations. The database URL is configured via the `DATABASE_URL` environment variable.
+
+### Database Setup
+
+1. Create a PostgreSQL database named `depi`
+2. Copy `env.example` to `.env` and update the `DATABASE_URL`
+3. Run `make migrate` to apply migrations
+4. Use `make makemigration` to create new migrations when models change
