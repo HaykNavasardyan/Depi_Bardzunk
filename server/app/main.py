@@ -3,6 +3,12 @@ from fastapi import FastAPI
 from .database import engine
 from .models import Base
 from .routes_users import router as users_router
+import os
+
+
+if os.getenv("ENABLE_CREATE_ALL", "0") == "1":
+    Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(title="Depi Bardzunk API")
 
