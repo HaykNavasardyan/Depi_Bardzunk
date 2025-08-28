@@ -3,9 +3,11 @@ on:
   push:
     branches: [ main ]
   pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:15
@@ -19,10 +21,13 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
+
     env:
       DATABASE_URL: postgresql+psycopg2://postgres:postgres@localhost:5432/depi
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
