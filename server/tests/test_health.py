@@ -5,11 +5,10 @@ from app.main import app
 client = TestClient(app)
 
 
-def test_health_endpoint():
-    """Test that the health endpoint returns the expected response"""
-    response = client.get("/health")
-    assert response.status_code == 200
-    assert response.json() == {"ok": True}
+def test_health():
+    r = client.get("/health")
+    assert r.status_code == 200
+    assert r.json() == {"ok": True}
 
 
 def test_root_endpoint():
